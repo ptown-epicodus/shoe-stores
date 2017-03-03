@@ -1,0 +1,20 @@
+{% extends 'template.html.twig' %}
+
+{% block content %}
+    {% if all_stores is not empty %}
+        {% for store in all_stores %}
+            <p>{{ store.getName }}</p>
+        {% endfor %}
+    {% else %}
+        <p>There are no stores in the database.</p>
+    {% endif %}
+    <h3>Add a store:</h3>
+    <form action='/add_store' method='post'>
+        <label for='name'>Name</label>
+        <input id='name' name='store-name' type='text'>
+
+        <button type='submit'>Add</button>
+    </form>
+
+    <p><a href='/'>Home</a></p>
+{% endblock %}
