@@ -22,6 +22,7 @@ CREATE DATABASE shoes_test;
 USE shoes_test;
 CREATE TABLE stores (id serial PRIMARY KEY, name VARCHAR(255));
 CREATE TABLE brands (id serial PRIMARY KEY, name VARCHAR(255));
+CREATE TABLE brands_stores (brand_id BIGINT(20), store_id BIGINT(20));
 ```
 
 ## Technologies Used

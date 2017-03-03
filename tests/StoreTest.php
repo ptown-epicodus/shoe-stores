@@ -5,6 +5,7 @@
 */
 
 require_once 'src/Store.php';
+require_once 'src/Brand.php';
 
 $server = 'mysql:host=localhost:8889;dbname=shoes_test';
 $username = 'root';
@@ -16,6 +17,7 @@ class StoreTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         Store::deleteAll();
+        Brand::deleteAll();
     }
 
     function test_save()
@@ -121,6 +123,49 @@ class StoreTest extends PHPUnit_Framework_TestCase
 
         //Assert
         $this->assertEquals([$test_Store2], $result);
+    }
+
+    function test_addBrand()
+    {
+        //Arrange
+        $store_name = 'DSW';
+        $test_Store = new Store($store_name);
+        $test_Store->save();
+
+        $brand_name = 'Nike';
+        $test_Brand = new Brand($brand_name);
+        $test_Brand->save();
+
+        //Act
+        $test_Store->addBrand($test_Brand);
+        $result = $test_Store->getBrands();
+
+        //Assert
+        $this->assertEquals([$test_Brand], $result);
+    }
+
+    function test_getBrands()
+    {
+        //Arrange
+        $store_name = 'DSW';
+        $test_Store = new Store($store_name);
+        $test_Store->save();
+
+        $brand_name1 = 'Nike';
+        $test_Brand1 = new Brand($brand_name1);
+        $test_Brand1->save();
+
+        $brand_name2 = 'Adidas';
+        $test_Brand2 = new Brand($brand_name2);
+        $test_Brand2->save();
+
+        //Act
+        $test_Store->addBrand($test_Brand1);
+        $test_Store->addBrand($test_Brand2);
+        $result = $test_Store->getBrands();
+
+        //Assert
+        $this->assertEquals([$test_Brand1, $test_Brand2], $result);
     }
 }
 ?>

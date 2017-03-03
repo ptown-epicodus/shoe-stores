@@ -42,6 +42,31 @@ class Store
         $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
     }
 
+    function addBrand($brand)
+    {
+        $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$brand->getId()}, {$this->getId()});");
+    }
+
+    function getBrands()
+    {
+        $brands = [];
+
+        $query = $GLOBALS['DB']->query(
+            "SELECT brands.* FROM" .
+            " stores" .
+            " JOIN brands_stores ON (stores.id = brands_stores.store_id)" .
+            " JOIN brands ON (brands_stores.brand_id = brands.id)" .
+            " WHERE stores.id = {$this->getId()};"
+        );
+        foreach($query as $brand) {
+            $id = $brand['id'];
+            $name = $brand['name'];
+            array_push($brands, new Brand($name, $id));
+        }
+
+        return $brands;
+    }
+
     static function getAll()
     {
         $query = $GLOBALS['DB']->query("SELECT * FROM stores;");
@@ -51,6 +76,7 @@ class Store
     static function deleteAll()
     {
         $GLOBALS['DB']->exec("DELETE FROM stores;");
+        $GLOBALS['DB']->exec("DELETE FROM brands_stores;");
     }
 
     static function find($search_id)
