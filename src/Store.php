@@ -84,7 +84,7 @@ class Store
     {
         $found_store = null;
 
-        $query = $GLOBALS['DB']->query("SELECT * FROM stores;");
+        $query = $GLOBALS['DB']->query("SELECT * FROM stores WHERE id = {$search_id};");
         $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Store', [ 'name', 'id']);
         $found_store = $query->fetch();
 
