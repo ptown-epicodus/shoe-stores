@@ -1,0 +1,26 @@
+{% extends 'template.html.twig' %}
+
+{% block content %}
+    <h1>{{ store.getName }}</h1>
+    <h2>Brands carried:</h2>
+    <ul>
+        {% for brand in carried_brands %}
+            <li>{{ brand.getName }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if unavailable_brands is not empty %}
+        <h3>Register brand to store:</h3>
+        <form action='/stores/{{ store.getId }}/brands' method='post'>
+            <select id='brands' name='brand-id'>
+                {% for brand in unavailable_brands %}
+                    <option value='{{ brand.getId }}'>{{ brand.getName }}</option>
+                {% endfor %}
+            </select>
+            <button type='submit'>Register</button>
+        </form>
+    {% endif %}
+
+    <p><a href='/stores'>Back</a></p>
+    <p><a href='/'>Home</a></p>
+{% endblock %}

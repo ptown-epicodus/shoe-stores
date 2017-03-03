@@ -3,7 +3,15 @@
 {% block content %}
     {% if all_stores is not empty %}
         {% for store in all_stores %}
-            <p>{{ store.getName }}</p>
+            <h3><a href='/stores/{{ store.getId }}'>{{ store.getName }}</a></h3>
+            {% if store.getBrands is not empty %}
+                <p>Available brands:</p>
+                <ul>
+                    {% for brand in store.getBrands %}
+                        <li>{{ brand.getName }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endfor %}
     {% else %}
         <p>There are no stores in the database.</p>

@@ -31,11 +31,31 @@ $app->get('/stores', function() use ($app) {
     ]);
 });
 
+$app->get('/stores/{id}', function($id) use ($app) {
+    $store = Store::find($id);
+    $carried_brands = $store->getBrands();
+    $unavailable_brands = array_udiff(Brand::getAll(), $carried_brands, function($a, $b) {
+        return $a->getId() - $b->getId();
+    });
+    return $app['twig']->render('store.html.twig', [
+        'store' => $store,
+        'carried_brands' => $carried_brands,
+        'unavailable_brands' => $unavailable_brands
+    ]);
+});
+
 $app->post('/add_store', function() use ($app) {
     $store_name = $_POST['store-name'];
     $new_store = new Store($store_name);
     $new_store->save();
     return $app->redirect('/stores');
+});
+
+$app->post('stores/{id}/brands', function($id) use ($app) {
+    $store = Store::find($id);
+    $brand = Brand::find($_POST['brand-id']);
+    $store->addBrand($brand);
+    return $app->redirect("/stores/{$id}");
 });
 
 // Routes for Brand
