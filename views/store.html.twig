@@ -21,6 +21,22 @@
         </form>
     {% endif %}
 
+    <h3>Update store name:</h3>
+    <form action='/stores/{{ store.getId }}' method='post'>
+        <input name="_method" type="hidden" value="patch">
+
+        <label for='name'>Rename:</label>
+        <input id='name' name='store-name' type='text'>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <form action='/stores/{{ store.getId }}' method='post'>
+        <input name="_method" type="hidden" value="delete">
+
+        <button type="submit">Delete this store</button>
+    </form>
+
     <p><a href='/stores'>Back</a></p>
     <p><a href='/'>Home</a></p>
 {% endblock %}

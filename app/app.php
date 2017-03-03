@@ -44,10 +44,23 @@ $app->get('/stores/{id}', function($id) use ($app) {
     ]);
 });
 
-$app->post('/add_store', function() use ($app) {
+$app->post('/stores', function() use ($app) {
     $store_name = $_POST['store-name'];
     $new_store = new Store($store_name);
     $new_store->save();
+    return $app->redirect('/stores');
+});
+
+$app->patch('/stores/{id}', function($id) use ($app) {
+    $store = Store::find($id);
+    $new_name = $_POST['store-name'];
+    $store->update($new_name);
+    return $app->redirect("/stores/{$id}");
+});
+
+$app->delete('/stores/{id}', function($id) use ($app) {
+    $store = Store::find($id);
+    $store->delete();
     return $app->redirect('/stores');
 });
 
