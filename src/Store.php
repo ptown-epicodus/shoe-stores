@@ -45,7 +45,7 @@ class Store
     static function getAll()
     {
         $query = $GLOBALS['DB']->query("SELECT * FROM stores;");
-        return $query->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Store', [ 'name', 'id']);
+        return $query->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Store', [ 'name', 'id' ]);
     }
 
     static function deleteAll()
