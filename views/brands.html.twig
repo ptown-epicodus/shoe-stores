@@ -1,0 +1,20 @@
+{% extends 'template.html.twig' %}
+
+{% block content %}
+    {% if all_brands is not empty %}
+        {% for brand in all_brands %}
+            <p>{{ brand.getName }}</p>
+        {% endfor %}
+    {% else %}
+        <p>There are no brands in the database.</p>
+    {% endif %}
+    <h3>Add a brand:</h3>
+    <form action='/add_brand' method='post'>
+        <label for='name'>Name</label>
+        <input id='name' name='brand-name' type='text'>
+
+        <button type='submit'>Add</button>
+    </form>
+
+    <p><a href='/'>Home</a></p>
+{% endblock %}
