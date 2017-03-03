@@ -16,6 +16,11 @@ This Silex website for keeping track of shoe stores and the brands they carry.
 4. Click 'Start Servers' in MAMP.
 5. Visit **`localhost:8888`** in web browser.
 
+## Database Setup
+```sql
+CREATE DATABASE shoes_test;
+USE shoes_test;
+```
 
 ## Technologies Used
 
