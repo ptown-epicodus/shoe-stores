@@ -78,11 +78,31 @@ $app->get('/brands', function() use ($app) {
     ]);
 });
 
-$app->post('/add_brand', function() use ($app) {
+$app->get('/brands/{id}', function($id) use ($app) {
+    $brand = Brand::find($id);
+    $retailers = $brand->getStores();
+    $non_retailers = array_udiff(Store::getAll(), $retailers, function($a, $b) {
+        return $a->getId() - $b->getId();
+    });
+    return $app['twig']->render('brand.html.twig', [
+        'brand' => $brand,
+        'retailers' => $retailers,
+        'non_retailers' => $non_retailers
+    ]);
+});
+
+$app->post('/brands', function() use ($app) {
     $brand_name = $_POST['brand-name'];
     $new_brand = new Brand($brand_name);
     $new_brand->save();
     return $app->redirect('/brands');
+});
+
+$app->post('/brands/{id}/stores', function($id) use ($app) {
+    $brand = Brand::find($id);
+    $store = Store::find($_POST['store-id']);
+    $brand->addStore($store);
+    return $app->redirect("/brands/{$id}");
 });
 
 return $app;

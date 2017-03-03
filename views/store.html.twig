@@ -5,7 +5,7 @@
     <h2>Brands carried:</h2>
     <ul>
         {% for brand in carried_brands %}
-            <li>{{ brand.getName }}</li>
+            <li><a href='/brands/{{ brand.getId }}'>{{ brand.getName }}</a></li>
         {% endfor %}
     </ul>
 

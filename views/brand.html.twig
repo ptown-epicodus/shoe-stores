@@ -1,0 +1,30 @@
+{% extends 'template.html.twig' %}
+
+{% block content %}
+    <h2>{{ brand.getName }}</h3>
+    {% if retailers is not empty %}
+        <h3>Available at:</h3>
+        <ul>
+            {% for store in retailers %}
+                <li><a href='/stores/{{ store.getId }}'>{{ store.getName }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>This brand is not currently available at any retailers.</p>
+    {% endif %}
+
+    {% if non_retailers is not empty %}
+        <h3>Register a retailer:</h3>
+        <form action='/brands/{{ brand.getId }}/stores' method='post'>
+            <select id='stores' name='store-id'>
+                {% for store in non_retailers %}
+                    <option value='{{ store.getId }}'>{{ store.getName }}</option>
+                {% endfor %}
+            </select>
+            <button type='submit'>Register</button>
+        </form>
+    {% endif %}
+
+    <p><a href='/brands'>Back</a></p>
+    <p><a href='/'>Home</a></p>
+{% endblock %}

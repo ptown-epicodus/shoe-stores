@@ -8,7 +8,7 @@
                 <p>Available brands:</p>
                 <ul>
                     {% for brand in store.getBrands %}
-                        <li>{{ brand.getName }}</li>
+                        <li><a href='/brands/{{ brand.getId }}'>{{ brand.getName }}</a></li>
                     {% endfor %}
                 </ul>
             {% endif %}
