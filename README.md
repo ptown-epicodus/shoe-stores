@@ -21,6 +21,7 @@ This Silex website for keeping track of shoe stores and the brands they carry.
 CREATE DATABASE shoes_test;
 USE shoes_test;
 CREATE TABLE stores (id serial PRIMARY KEY, name VARCHAR(255));
+CREATE TABLE brands (id serial PRIMARY KEY, name VARCHAR(255));
 ```
 
 ## Technologies Used

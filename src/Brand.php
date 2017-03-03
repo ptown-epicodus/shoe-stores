@@ -24,5 +24,22 @@ class Brand
     {
         $this->name = $new_name;
     }
+
+    function save()
+    {
+        $GLOBALS['DB']->exec("INSERT INTO brands (name) VALUES ('{$this->getName()}');");
+        $this->id = $GLOBALS['DB']->lastInsertId();
+    }
+
+    static function getAll()
+    {
+        $query = $GLOBALS['DB']->query("SELECT * FROM brands;");
+        return $query->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Brand', [ 'name', 'id' ]);
+    }
+
+    static function deleteAll()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM brands;");
+    }
 }
 ?>
