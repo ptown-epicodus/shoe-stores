@@ -2,39 +2,62 @@
 
 {% block content %}
     <h1>{{ store.getName }}</h1>
-    <h2>Brands carried:</h2>
-    <ul>
-        {% for brand in carried_brands %}
-            <li><a href='/brands/{{ brand.getId }}'>{{ brand.getName }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class='panel panel-info'>
+        <div class='panel-heading'>
+            <h2 class='panel-title'>Brands carried:</h2>
+        </div>
+        <div class='panel-body'>
+            <ul>
+                {% for brand in carried_brands %}
+                    <li><a href='/brands/{{ brand.getId }}'>{{ brand.getName }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
     {% if unavailable_brands is not empty %}
-        <h3>Register brand to store:</h3>
-        <form action='/stores/{{ store.getId }}/brands' method='post'>
-            <select id='brands' name='brand-id'>
-                {% for brand in unavailable_brands %}
-                    <option value='{{ brand.getId }}'>{{ brand.getName }}</option>
-                {% endfor %}
-            </select>
-            <button type='submit'>Register</button>
-        </form>
+        <div class='panel panel-default'>
+            <div class='panel-heading'>
+                <h3>Register brand to store:</h3>
+            </div>
+            <div class='panel-body'>
+                <form action='/stores/{{ store.getId }}/brands' method='post'>
+                    <div class='form-group'>
+                        <select id='brands' name='brand-id' class='form-control'>
+                            {% for brand in unavailable_brands %}
+                                <option value='{{ brand.getId }}'>{{ brand.getName }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type='submit' class='btn btn-default'>Register</button>
+                </form>
+            </div>
+        </div>
     {% endif %}
 
-    <h3>Update store name:</h3>
-    <form action='/stores/{{ store.getId }}' method='post'>
-        <input name="_method" type="hidden" value="patch">
+    <div class='panel panel-default'>
+        <div class='panel-heading'>
+            <h3 class='panel-title'>Update store name:</h3>
+        </div>
+        <div class='panel-body'>
+            <form action='/stores/{{ store.getId }}' method='post'>
+                <input name="_method" type="hidden" value="patch">
 
-        <label for='name'>Rename:</label>
-        <input id='name' name='store-name' type='text'>
+                <div class='form-group'>
+                    <label for='name'>Rename:</label>
+                    <input id='name' name='store-name' type='text' class='form-control'>
+                </div>
 
-        <button type="submit">Update</button>
-    </form>
+                <button type="submit" class='btn btn-warning'>Update</button>
+            </form>
+        </div>
+    </div>
+
 
     <form action='/stores/{{ store.getId }}' method='post'>
         <input name="_method" type="hidden" value="delete">
 
-        <button type="submit">Delete this store</button>
+        <button type="submit" class='btn btn-danger'>Delete this store</button>
     </form>
 
     <p><a href='/stores'>Back</a></p>

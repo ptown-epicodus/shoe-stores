@@ -1,28 +1,44 @@
 {% extends 'template.html.twig' %}
 
 {% block content %}
+    <h1>Stores</h1>
+
     {% if all_stores is not empty %}
         {% for store in all_stores %}
-            <h3><a href='/stores/{{ store.getId }}'>{{ store.getName }}</a></h3>
-            {% if store.getBrands is not empty %}
-                <p>Available brands:</p>
-                <ul>
-                    {% for brand in store.getBrands %}
-                        <li><a href='/brands/{{ brand.getId }}'>{{ brand.getName }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            <div class='panel panel-info'>
+                <div class='panel-heading'>
+                    <h3><a href='/stores/{{ store.getId }}'>{{ store.getName }}</a></h3>
+                </div>
+                {% if store.getBrands is not empty %}
+                    <div class='panel-body'>
+                        <p>Available brands:</p>
+                        <ul>
+                            {% for brand in store.getBrands %}
+                                <li><a href='/brands/{{ brand.getId }}'>{{ brand.getName }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
         {% endfor %}
     {% else %}
         <p>There are no stores in the database.</p>
     {% endif %}
-    <h3>Add a store:</h3>
-    <form action='/stores' method='post'>
-        <label for='name'>Name</label>
-        <input id='name' name='store-name' type='text'>
+    <div class='panel panel-success'>
+        <div class='panel-heading'>
+            <h3 class='panel-title'>Add a store:</h3>
+        </div>
+        <div class='panel-body'>
+            <form action='/stores' method='post'>
+                <div class='form-group'>
+                    <label for='name'>Name</label>
+                    <input id='name' name='store-name' type='text' class='form-control'>
+                </div>
 
-        <button type='submit'>Add</button>
-    </form>
+                <button type='submit' class='btn btn-success'>Add</button>
+            </form>
+        </div>
+    </div>
 
     <p><a href='/'>Home</a></p>
 {% endblock %}

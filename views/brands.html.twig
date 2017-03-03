@@ -1,21 +1,30 @@
 {% extends 'template.html.twig' %}
 
 {% block content %}
-    <h2>Brands</h2>
+    <h1>Brands</h1>
     {% if all_brands is not empty %}
         {% for brand in all_brands %}
-            <p><a href='/brands/{{ brand.getId }}'>{{ brand.getName }}</a></p>
+            <h3><a href='/brands/{{ brand.getId }}'>{{ brand.getName }}</a></h3>
         {% endfor %}
     {% else %}
         <p>There are no brands in the database.</p>
     {% endif %}
-    <h3>Add a brand:</h3>
-    <form action='/brands' method='post'>
-        <label for='name'>Name</label>
-        <input id='name' name='brand-name' type='text'>
 
-        <button type='submit'>Add</button>
-    </form>
+    <div class='panel panel-success'>
+        <div class='panel-heading'>
+            <h3 class='panel-title'>Add a brand:</h3>
+        </div>
+        <div class='panel-body'>
+            <form action='/brands' method='post'>
+                <div class='form-group'>
+                    <label for='name'>Name</label>
+                    <input id='name' name='brand-name' type='text' class='form-control'>
+                </div>
+
+                <button type='submit' class='btn btn-success'>Add</button>
+            </form>
+        </div>
+    </div>
 
     <p><a href='/'>Home</a></p>
 {% endblock %}

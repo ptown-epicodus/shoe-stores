@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shoe Stores</title>
+        <link href='/../css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Shoe stores</title>
     </head>
     <body>
-        <h1>Shoe stores</h1>
-        {% block content %}
-        {% endblock %}
+        <div class='container'>
+            <div class='jumbotron'>
+                <h1>Shoe Store Tracker</h1>
+            </div>
+            {% block content %}
+            {% endblock %}
+        </div>
     </body>
 </html>

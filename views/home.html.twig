@@ -2,7 +2,11 @@
 
 {% block content %}
     <form method='get'>
-        <button type='submit' name='stores' formaction='/stores'>Manage stores</button>
-        <button type='submit' name='brands' formaction='/brands'>Manage brands</button>
+        <div class='form-group'>
+            <button type='submit' name='stores' formaction='/stores' class='btn btn-info'>Manage stores</button>
+        </div>
+        <div class='form-group'>
+            <button type='submit' name='brands' formaction='/brands' class='btn btn-info'>Manage brands</button>
+        </div>
     </form>
 {% endblock %}
