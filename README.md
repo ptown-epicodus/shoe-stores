@@ -34,8 +34,6 @@ CREATE TABLE brands_stores (brand_id BIGINT(20), store_id BIGINT(20));
 
 HTML
 
-CSS
-
 Bootstrap
 
 PHP
