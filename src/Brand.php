@@ -41,5 +41,16 @@ class Brand
     {
         $GLOBALS['DB']->exec("DELETE FROM brands;");
     }
+
+    static function find($search_id)
+    {
+        $found_brand = null;
+
+        $query = $GLOBALS['DB']->query("SELECT * FROM brands WHERE id = {$search_id};");
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Brand', [ 'name', 'id' ]);
+        $found_brand = $query->fetch();
+
+        return $found_brand;
+    }
 }
 ?>

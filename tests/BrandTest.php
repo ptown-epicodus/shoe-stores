@@ -39,7 +39,7 @@ class BrandTest extends PHPUnit_Framework_TestCase
         $test_Brand1 = new Brand($name1);
         $test_Brand1->save();
 
-        $name2 = 'Nike';
+        $name2 = 'Adidas';
         $test_Brand2 = new Brand($name2);
         $test_Brand2->save();
 
@@ -57,7 +57,7 @@ class BrandTest extends PHPUnit_Framework_TestCase
         $test_Brand1 = new Brand($name1);
         $test_Brand1->save();
 
-        $name2 = 'Nike';
+        $name2 = 'Adidas';
         $test_Brand2 = new Brand($name2);
         $test_Brand2->save();
 
@@ -67,6 +67,25 @@ class BrandTest extends PHPUnit_Framework_TestCase
 
         //Arrange
         $this->assertEquals([], $result);
+    }
+
+    function test_find()
+    {
+        //Arrange
+        $name1 = 'Nike';
+        $test_Brand1 = new Brand($name1);
+        $test_Brand1->save();
+        $search_id = $test_Brand1->getId();
+
+        $name2 = 'Adidas';
+        $test_Brand2 = new Brand($name2);
+        $test_Brand2->save();
+
+        //Act
+        $result = Brand::find($search_id);
+
+        //Arrange
+        $this->assertEquals($test_Brand1, $result);
     }
 }
 ?>
