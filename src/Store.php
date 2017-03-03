@@ -41,5 +41,16 @@ class Store
     {
         $GLOBALS['DB']->exec("DELETE FROM stores;");
     }
+
+    static function find($search_id)
+    {
+        $found_store = null;
+
+        $query = $GLOBALS['DB']->query("SELECT * FROM stores;");
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Store', [ 'name', 'id']);
+        $found_store = $query->fetch();
+
+        return $found_store;
+    }
 }
 ?>
